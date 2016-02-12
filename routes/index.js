@@ -21,7 +21,7 @@ router.get('/search', function(req, res) {
         res.send('invalid value');
         res.end();
         return false;
-    };
+    }
 
     //check expression for value like number( or )number
     var reg2 = /(\d\()|(\)\d)/g;
@@ -31,7 +31,7 @@ router.get('/search', function(req, res) {
         res.send('invalid syntaxis, like " numder"(" "');
         res.end();
         return false;
-    };
+    }
 
     // check equal open quots to close quots
     var openQuots = 0;
@@ -40,17 +40,17 @@ router.get('/search', function(req, res) {
     for ( var i = 0; i < arrResult.length; i++) {
         if (arrResult[i] === '(') {
             openQuots++;
-        };
+        }
         if (arrResult[i] === ')') {
             closeQuots++;
-        };
-    };
+        }
+    }
     if ( (openQuots - closeQuots) !== 0 ) {
         //res.send(500,);
         res.send('Wrong number of open and closе quots');
         res.end();
         return false;
-    };
+    }
 
     var resultEval = eval(result);
     res.send('result = ' + resultEval);

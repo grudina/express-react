@@ -83,14 +83,7 @@
 	        value: function handleClick(event) {
 
 	            var text = encodeURIComponent(this.state.text);
-	            var res = this.state.text.match(/[a-zа-яё\s\.\@\=\/]+[\d()\d]+/gi);
-	            console.log(res);
-	            if (res !== null) {
-	                for (var i = 0; i < res.length; i++) {
-	                    alert('с этим символом получим NAN :' + ' " ' + res[i] + '" ;');
-	                }
-	                return false;
-	            };
+	            //let res = this.state.text.match(/[a-zа-яё\s\.\@\=\/]+[\d()\d]+/gi);
 	            var xmlhttp = new XMLHttpRequest();
 	            xmlhttp.open('GET', '/search?inputVal=' + text, true);
 	            xmlhttp.onreadystatechange = function () {

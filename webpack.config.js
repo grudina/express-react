@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './Calc.js',
+    entry: './components/Calc.js',
     output: {
         path: './',
         filename: 'public/index-react.js'
