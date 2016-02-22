@@ -81,7 +81,6 @@
 	    _createClass(Calc, [{
 	        key: 'handleClick',
 	        value: function handleClick(event) {
-
 	            var text = encodeURIComponent(this.state.text);
 	            //let res = this.state.text.match(/[a-zа-яё\s\.\@\=\/]+[\d()\d]+/gi);
 	            var xmlhttp = new XMLHttpRequest();
@@ -111,7 +110,7 @@
 	                _react2.default.createElement('input', { type: 'text', id: 'input', onChange: this.onChange.bind(this.state.text), value: this.state.text }),
 	                _react2.default.createElement(
 	                    'button',
-	                    { className: 'button', onClick: this.handleClick },
+	                    { type: 'submit', className: 'button', onClick: this.handleClick },
 	                    'button'
 	                )
 	            );

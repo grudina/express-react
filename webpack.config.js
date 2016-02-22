@@ -7,24 +7,16 @@ module.exports = {
 
     watch: true,
 
-    //watchOptions: {
-    //    aggregateTimeout: 100
-    //},
-    //devServer: {
-    //    inline: true,
-    //    port: 3333
-    //},
-
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: [/node_modules/, /react/],
-                loader: 'babel',
+                exclude: [/node_modules/],
+                loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react']
                 }
             }
         ]
     }
-}
+};
