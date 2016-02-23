@@ -9,7 +9,7 @@ router.get('/yo', function(req, res) {
     res.send('YOYOYOyooYOYOYYOYO!');
 });
 
-router.get('/search', function(req, res) {
+router.get('/api/search', function(req, res) {
     var result = req.query.inputVal;
     res.status = 200;
     //var res1 = result.match(/[a-zа-яё\s\.\@\=\/]+/gi);

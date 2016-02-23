@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import ReactDom from 'react-dom';
+import {render} from 'react-dom';
 
 class Calc extends React.Component {
     constructor() {
@@ -14,7 +14,8 @@ class Calc extends React.Component {
         let text = encodeURIComponent(this.state.text);
         //let res = this.state.text.match(/[a-zа-яё\s\.\@\=\/]+[\d()\d]+/gi);
         let xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('GET', '/search?inputVal=' + text, true);
+        console.log(text);
+        xmlhttp.open('GET', '/api/search?inputVal=' + text, true);
         xmlhttp.onreadystatechange = function() {
 
             if (xmlhttp.readyState == 4) {
@@ -30,7 +31,7 @@ class Calc extends React.Component {
     onChange(e) {
         this.setState({text: e.target.value});
     };
-    
+
     render() {
         return (
             <div className="component-wrapper">
@@ -40,5 +41,5 @@ class Calc extends React.Component {
         );
     }
 };
-
-ReactDom.render(<Calc />, document.getElementById('app'));
+console.log(document.querySelector('#app'))
+render(<Calc />, document.querySelector('#app'));
