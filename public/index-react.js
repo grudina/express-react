@@ -54,8 +54,6 @@
 
 	var _reactDom = __webpack_require__(158);
 
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -84,7 +82,8 @@
 	            var text = encodeURIComponent(this.state.text);
 	            //let res = this.state.text.match(/[a-zа-яё\s\.\@\=\/]+[\d()\d]+/gi);
 	            var xmlhttp = new XMLHttpRequest();
-	            xmlhttp.open('GET', '/search?inputVal=' + text, true);
+	            console.log(text);
+	            xmlhttp.open('GET', '/api/search?inputVal=' + text, true);
 	            xmlhttp.onreadystatechange = function () {
 
 	                if (xmlhttp.readyState == 4) {
@@ -121,8 +120,8 @@
 	}(_react2.default.Component);
 
 	;
-
-	_reactDom2.default.render(_react2.default.createElement(Calc, null), document.getElementById('app'));
+	console.log(document.querySelector('#app'));
+	(0, _reactDom.render)(_react2.default.createElement(Calc, null), document.querySelector('#app'));
 
 /***/ },
 /* 1 */
