@@ -12,7 +12,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use((req, res, next) => {
-    console.log(req.url)
+    var result = req.query;
+    console.log(result);
+    console.log(req.url);
+    console.log(req.url.indexOf('/api') !== -1);
    if(req.url.indexOf('/api') !== -1) {
        next()
    } else {
@@ -23,9 +26,14 @@ app.use((req, res, next) => {
 
 
 app.use((req, res, next) => {
-    res.json({ok: false, message: "Not Found"})
+    res.json({ok: false, message: "Access Denied", code: 403})
 });
 
 app.listen(config.port, () => {
     
-})
+});
+// {
+//     ok: false,
+//         message: "Access Denied",
+//     code: 403
+// }

@@ -1,16 +1,15 @@
+var path = require('path');
+
 module.exports = {
-    entry: './components/Calc.js',
+    entry: path.join(__dirname, 'components', '/Calc.js'),
     output: {
-        path: './',
-        filename: 'public/index-react.js'
+        path: path.join(__dirname, 'public'),
+        filename: 'index-react.js'
     },
-
-    watch: true,
-
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: [/node_modules/],
                 loader: 'babel-loader',
                 query: {

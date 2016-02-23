@@ -1,22 +1,40 @@
-var MongoClient = require('mongodb').MongoClient
-    , format = require('util').format;
+var User = require('server/models/user').User;
 
-MongoClient.connect('mongodb://127.0.0.1:27017/chat', function(err, db) {
-    if (err) throw err;
+var user = new User ({
+    username: "Tester2",
+    password: "secret"
+});
 
-    var collection = db.collection('test_insert');
-    collection.remove({}, function(err, affected) {
-        if (err) throw err;
-
-        collection.insert({a: 3}, function(err, docs) {
-
-            var cursor = collection.find({a: 3});
-            cursor.toArray(function(err, results) {
-                console.dir(results);
-                // Let's close the db
-                db.close();
-            });
-        });
-
+user.save(function(err, user, affected) {
+    if(err) throw err;
+    console.log(arguments);
+    
+    User.findOne({username: "Tester"}, function(err, tester) {
+        console.log(tester);
     });
 });
+// var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/test');
+//
+// var schema = mongoose.Schema({
+//     name: String,
+//     surname: String
+// });
+//
+// schema.methods.meow = function() {
+//     console.log(this.get('name'));
+//     console.log(this.get('surname'));
+// };
+//
+// var Cat = mongoose.model('Cat', schema);
+//
+// var kitty = new Cat({
+//     name: 'Zildjian',
+//     surname: 'Cool'
+// });
+//
+//
+// kitty.save(function(err, kitty, affected){
+//     kitty.meow();
+// });
+
