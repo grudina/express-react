@@ -2,13 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/style.css">
-    <title>Title</title>
+    <title>login</title>
 </head>
 <body>
-    Test
-    <h1>welcome to all</h1>
-    <div id="app"></div>
-    <script src="index-react.js" type="application/javascript"></script>
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Legend</legend>
+        <div class="form-group">
+            <label for="Name" class="col-md-2 control-label">Name</label>
+
+            <div class="col-md-10">
+                <input class="form-control" id="Name" placeholder="Name" type="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-md-2 control-label">Password</label>
+
+            <div class="col-md-10">
+                <input class="form-control" id="inputPassword" placeholder="Password" type="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+                <button type="button" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
 </body>
 </html>
