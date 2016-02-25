@@ -3,21 +3,40 @@ import multer from 'multer'
 import bodyParser from 'body-parser'
 import path from 'path'
 import config from './config/index'
-import appRoutes from './../../routes/index'
+import passport from 'passport'
+import {Strategy as LocalStrategy} from 'passport-local'
+import {User} from './modules/user/documents/User'
+import cookieParser from 'cookie-parser'
+import session from'cookie-session'
+import mongoose from 'mongoose'
+
+import {routes as UserRoutes} from './modules/user/index'
+import {routes as SongRoutes} from './modules/songs/index'
 
 export const app = express();
-// var router = app.Router();
 
 app.use(express.static(path.join(__dirname, '../../public')));
-app.use(multer().fields());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(cookieParser());
+app.use(session({keys: ['secretkey1']}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+mongoose.connect('mongodb://localhost/passport_local_mongoose_examples', function(err) {
+    if (err) {
+        console.log('Could not connect to mongodb on localhost. Ensure that you have mongodb running on localhost and mongodb accepts connections on standard ports!');
+    }
+});
+
+
 app.use((req, res, next) => {
-    var result = req.query;
-    // console.log(result);
-    // console.log(req.url);
-    // console.log(req.url.indexOf('/api') !== -1);
    if(req.url.indexOf('/api') !== -1) {
        next()
    } else {
@@ -25,18 +44,9 @@ app.use((req, res, next) => {
    }
 });
 
-
-// app.use((req, res, next) => {
-//     res.json({ok: false, message: "Access Denied", code: 403})
-// });
-
-app.use('/api/application', appRoutes);
+app.use('/api/user/', UserRoutes);
+app.use('/api/song/', SongRoutes);
 
 app.listen(config.port, () => {
     
 });
-// {
-//     ok: false,
-//         message: "Access Denied",
-//     code: 403
-// }

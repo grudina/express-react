@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+let router = express.Router();
 
 router.get('/', function(req, res) {
     res.send('Hello, World!');
@@ -8,6 +8,21 @@ router.get('/', function(req, res) {
 router.get('/yo', function(req, res) {
     res.send('YOYOYOyooYOYOYYOYO!');
 });
+
+router.get('/index', function (req, res) {
+    res.render('index.jade', { title: 'Hey', message: 'Hello there!'});
+});
+
+router.get('/calc', function(req, res) {
+    res.render('calculator.jade', {title: 'calculator', massage: 'Hello from Calculator'});
+});
+
+router.get('/login', function(req, res) {
+    res.render('login');
+});
+
+
+module.exports = router;
 //
 // router.get('/api/search', function(req, res) {
 //     var result = req.query.inputVal;
@@ -56,30 +71,3 @@ router.get('/yo', function(req, res) {
 //     res.send('result = ' + resultEval);
 // });
 
-router.get('/index', function (req, res) {
-    res.render('index.jade', { title: 'Hey', message: 'Hello there!'});
-});
-
-router.get('/calc', function(req, res) {
-    res.render('calculator.jade', {title: 'calculator', massage: 'Hello from Calculator'});
-});
-router.get('/login', function(req, res) {
-    res.render('login');
-})
-
-var User = require('./../server/models/user').User;
-router.get('/users', function(req, res, next) {
-    User.find({}, function(err, users) {
-        if(err) return next(err);
-        res.json(users);
-    })
-});
-
-router.get('/user/:id', function(req, res, next) {
-    User.findById(req.params.id, function(err, user) {
-        if(err) return next(err);
-        res.json(user);
-    })
-})
-
-module.exports = router;
