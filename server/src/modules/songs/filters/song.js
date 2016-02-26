@@ -1,10 +1,16 @@
-import {InputFilter, StringLength} from 'input-filter'
+import {InputFilter} from 'input-filter'
 
-export const filter = InputFilter.factory({
-    name: {
-        required: true,
-        validators: [
-            new StringLength({min: 1})
-        ]
-    }
-});
+import {name} from './fields/name'
+import {url} from './fields/url'
+import {path} from './fields/path'
+import {duration} from './fields/duration'
+
+let filterFields = {name, duration, path, url};
+
+export const filter = InputFilter.factory({name, url, path, duration});
+
+export const build = (fileds) =>
+    InputFilter.factory(
+        fileds
+            .filter(el => filterFields.hasOwnProperty(el))
+            .reduceRight((c, el) => ({...c, [el]: filterFields[el]}), {}));
