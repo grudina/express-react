@@ -1,3 +1,4 @@
+/** @flow */
 import mongoose, {Schema} from 'mongoose';
 import timestampsPlugin from 'mongoose-timestamps';
 import {STATUS_ACTIVE} from './../constants'

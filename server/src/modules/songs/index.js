@@ -7,6 +7,7 @@ import {update} from './routes/update'
 import {single} from './routes/single'
 import {list} from './routes/list'
 import {patch} from './routes/patch'
+import {remove} from './routes/remove'
 
 export const routes = Router();
 
@@ -46,5 +47,7 @@ routes
         next();
     })
     .post(checkId(handleNotFound('song', update), create))
+    .put(checkId(handleNotFound('song', update), methodNotAvailable))
     .get(checkId(handleNotFound('song', single), list))
-    .patch(checkId(handleNotFound('song', patch), methodNotAvailable));
+    .patch(checkId(handleNotFound('song', patch), methodNotAvailable))
+    .delete(checkId(handleNotFound('song', remove), methodNotAvailable));

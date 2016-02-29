@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-    entry: path.join(__dirname, 'components', '/Calc.js'),
+    entry: path.join(__dirname, 'client', '/app.js'),
     output: {
         path: path.join(__dirname, 'public'),
         filename: 'index-react.js'
@@ -13,7 +13,7 @@ module.exports = {
                 exclude: [/node_modules/],
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015', 'react']
+                    stage: 0
                 }
             }
         ]
