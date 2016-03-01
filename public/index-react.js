@@ -43395,27 +43395,18 @@
 	                'div',
 	                null,
 	                _react2['default'].createElement(
-	                    'h1',
-	                    null,
-	                    'You are loged in'
-	                )
-	            ) : _react2['default'].createElement(
-	                'div',
-	                null,
-	                _react2['default'].createElement(
 	                    _reactBootstrap.Navbar,
-	                    { inverse: true, className: 'navbar-form navbar-fixed-top' },
-	                    '>',
+	                    { className: 'navbar-form navbar-fixed-top pills' },
 	                    _react2['default'].createElement(
 	                        _reactBootstrap.Navbar.Header,
 	                        null,
 	                        _react2['default'].createElement(
-	                            _reactBootstrap.Navbar.Brand,
+	                            _reactBootstrap.Nav,
 	                            null,
 	                            _react2['default'].createElement(
-	                                'a',
-	                                { href: '#' },
-	                                'React-Bootstrap'
+	                                'h1',
+	                                null,
+	                                'Music'
 	                            )
 	                        ),
 	                        _react2['default'].createElement(_reactBootstrap.Navbar.Toggle, null)
@@ -43425,54 +43416,49 @@
 	                        null,
 	                        _react2['default'].createElement(
 	                            _reactBootstrap.Nav,
+	                            { pullRight: true },
+	                            _react2['default'].createElement(
+	                                _reactBootstrap.Button,
+	                                { bsStyle: 'warning', bsSize: 'small', onClick: this.login },
+	                                'Profile'
+	                            )
+	                        )
+	                    )
+	                )
+	            ) : _react2['default'].createElement(
+	                'div',
+	                null,
+	                _react2['default'].createElement(
+	                    _reactBootstrap.Navbar,
+	                    { className: 'navbar-form navbar-fixed-top pills' },
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Navbar.Header,
+	                        null,
+	                        _react2['default'].createElement(
+	                            _reactBootstrap.Nav,
 	                            null,
 	                            _react2['default'].createElement(
-	                                _reactBootstrap.NavItem,
-	                                { eventKey: 1, href: '#' },
-	                                'Link'
-	                            ),
-	                            _react2['default'].createElement(
-	                                _reactBootstrap.NavItem,
-	                                { eventKey: 2, href: '#' },
-	                                'Link'
-	                            ),
-	                            _react2['default'].createElement(
-	                                _reactBootstrap.NavDropdown,
-	                                { eventKey: 3, title: 'Dropdown', id: 'basic-nav-dropdown' },
-	                                _react2['default'].createElement(
-	                                    _reactBootstrap.MenuItem,
-	                                    { eventKey: 3.1 },
-	                                    'Action'
-	                                ),
-	                                _react2['default'].createElement(
-	                                    _reactBootstrap.MenuItem,
-	                                    { eventKey: 3.2 },
-	                                    'Another action'
-	                                ),
-	                                _react2['default'].createElement(
-	                                    _reactBootstrap.MenuItem,
-	                                    { eventKey: 3.3 },
-	                                    'Something else here'
-	                                ),
-	                                _react2['default'].createElement(_reactBootstrap.MenuItem, { divider: true }),
-	                                _react2['default'].createElement(
-	                                    _reactBootstrap.MenuItem,
-	                                    { eventKey: 3.3 },
-	                                    'Separated link'
-	                                )
+	                                'h1',
+	                                null,
+	                                'Music'
 	                            )
 	                        ),
+	                        _react2['default'].createElement(_reactBootstrap.Navbar.Toggle, null)
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Navbar.Collapse,
+	                        null,
 	                        _react2['default'].createElement(
 	                            _reactBootstrap.Nav,
 	                            { pullRight: true },
 	                            _react2['default'].createElement(
 	                                _reactBootstrap.Button,
-	                                { bsStyle: 'primary', onClick: this.login },
+	                                { bsStyle: 'warning', bsSize: 'small', onClick: this.login },
 	                                'Login'
 	                            ),
 	                            _react2['default'].createElement(
 	                                _reactBootstrap.Button,
-	                                { bsStyle: 'primary' },
+	                                { bsStyle: 'warning', bsSize: 'small' },
 	                                'register'
 	                            )
 	                        )
