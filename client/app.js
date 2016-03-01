@@ -18,9 +18,8 @@ syncReduxAndRouter(browserHistory, RouterStore)
 
 ReactDOM.render(
     <Router history={browserHistory}>
-        <Route path="/" component={Layout}>
-            <IndexRoute component={MainPage}/>
-            
+        <Route path="/" component={MainPage}>
+            <IndexRoute component={Layout}/>
         </Route>
     </Router>,
     document.querySelector("#app")/*getElementById('mount')*/

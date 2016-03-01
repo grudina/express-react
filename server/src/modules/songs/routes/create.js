@@ -7,7 +7,6 @@ export function create(req, res, next) {
         song.save().then(() => {
             res.json({ok: true, data: song})
         })
-    }).catch(errors => {
-        res.json({ok: false, errors})
+    }).catch(errors => {res.json({ok: false, errors})
     })
 }

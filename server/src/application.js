@@ -12,6 +12,7 @@ import mongoose from 'mongoose'
 
 import {routes as UserRoutes} from './modules/user/index'
 import {routes as SongRoutes} from './modules/songs/index'
+import {routes as PlayListRoutes} from './modules/playlist/index'
 
 export const app = express();
 
@@ -46,6 +47,7 @@ app.use((req, res, next) => {
 
 app.use('/api/user/', UserRoutes);
 app.use('/api/song/', SongRoutes);
+app.use('/api/playlist', PlayListRoutes);
 
 app.listen(config.port, () => {
     

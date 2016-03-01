@@ -1,0 +1,106 @@
+<div>
+    <Navbar inverse>
+        <Navbar.Header>
+            <Navbar.Brand>
+                <a href="#">React-Bootstrap</a>
+                </Navbar.Brand>
+            <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+            <Nav>
+                <NavItem eventKey={1} href="#">Link</NavItem>
+                <NavItem eventKey={2} href="#">Link</NavItem>
+                <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+                    <MenuItem eventKey={3.1}>Action</MenuItem>
+                    <MenuItem eventKey={3.2}>Another action</MenuItem>
+                    <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                    <MenuItem divider />
+                    <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                </NavDropdown>
+                </Nav>
+            <Nav pullRight>
+                <NavItem eventKey={1} href="#">Link Right</NavItem>
+                <NavItem eventKey={2} href="#">Link Right</NavItem>
+                </Nav>
+        </Navbar.Collapse>
+        </Navbar>
+    <Navbar>
+        <Navbar.Header>
+            <Navbar.Brand>
+                <a href="#">Brand</a>
+                </Navbar.Brand>
+            <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+            <Navbar.Form pullLeft>
+                <Input type="text" placeholder="Search"/>
+                {' '}
+                <Button type="submit">Submit</Button>
+                </Navbar.Form>
+        </Navbar.Collapse>
+        </Navbar>
+    <Nav bsStyle="pills" justified activeKey={1} onSelect={this.handleSelect}>
+        <NavItem eventKey={1} href="/home">NavItem 1 content</NavItem>
+        <NavItem eventKey={2} title="Item">NavItem 2 content</NavItem>
+        <NavItem eventKey={3} disabled>NavItem 3 content</NavItem>
+        </Nav>
+</div>
+<br/>
+<Well>Look I'm in a well!</Well>
+    <br/>
+    <Navbar>
+        <Navbar.Header>
+            <Navbar.Brand>
+                <a href="#">Brand</a>
+                </Navbar.Brand>
+            <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+            <Navbar.Text>
+                Signed in as: <Navbar.Link href="#">Mark Otto</Navbar.Link>
+                </Navbar.Text>
+            <Navbar.Text pullRight>
+                Have a great day!
+                </Navbar.Text>
+        </Navbar.Collapse>
+        </Navbar>
+    <Jumbotron>
+        <h1>Hello, world!</h1>
+        <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <p><Button bsStyle="primary">Learn more</Button></p>
+        </Jumbotron>
+
+    <h1>Please Log In</h1>
+    <Button bsStyle="primary" onClick={this.login} >Login</Button>
+    <Button bsStyle="success">Register</Button>
+    <ButtonGroup>
+        <Button>Left</Button>
+        <Button>Middle</Button>
+        <Button>Right</Button>
+        </ButtonGroup>
+    <form>
+        <Input type="text" ref="input" onChange={this.handleChange} />
+        <ButtonInput bsSize="small">Child Text</ButtonInput>
+        <ButtonInput type="reset" bsStyle="primary" onClick={this.resetValidation} />
+        <ButtonInput type="submit" value="Submit Your Input" bsStyle={this.state.style} bsSize="large" disabled={this.state.disabled} />
+        </form>
+    <SplitButton title="Dropdown right" pullRight id="split-button-pull-right">
+        <MenuItem eventKey="1">Action</MenuItem>
+        <MenuItem eventKey="2">Another action</MenuItem>
+        <MenuItem eventKey="3">Something else here</MenuItem>
+        <MenuItem divider />
+        <MenuItem eventKey="4">Separated link</MenuItem>
+        </SplitButton>
+    <div>
+        <h1>Label <Label>New</Label></h1>
+        <h2>Label <Label>New</Label></h2>
+        <h3>Label <Label>New</Label></h3>
+        <h4>Label <Label>New</Label></h4>
+        <h5>Label <Label>New</Label></h5>
+        <p>Label <Label>New</Label></p>
+        </div>
+
+</div>
+// <div>
+    // <h1>OK! You are loged in</h1>
+// </div>
