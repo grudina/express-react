@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {listen} from 'point-one'
-import {Button, ButtonGroup, ButtonInput, Input, Jumbotron, Nav, NavItem, Navbar, 
+import {Button, ButtonGroup, ButtonInput, Input, Jumbotron, Nav, NavItem, Navbar, NavbarBrand,
     MenuItem, NavDropdown, ListGroup, ListGroupItem} from 'react-bootstrap'
 import {UserStore, dispatch} from './../../user/UserStore'
 import {auth, logout} from './../../user/actions/user'
@@ -12,40 +12,32 @@ export default class MainPage extends Component {
     }
     render() {
         return (
-            this.state.identity ? (
+            <div>
                 <div>
-                    <Navbar className="navbar-form navbar-fixed-top pills">
+                    <Navbar fluid>
                         <Navbar.Header>
                             <Nav>
-                                <h1>Music</h1>
+                                <NavbarBrand>Music</NavbarBrand>
                             </Nav>
                             <Navbar.Toggle />
                         </Navbar.Header>
                         <Navbar.Collapse>
                             <Nav pullRight>
-                                <Button bsStyle="warning" bsSize="small" onClick={this.login}>Profile</Button>
+                                {this.state.identity ? (
+                                    <NavItem bsStyle="warning" bsSize="small" onClick={this.login}>Profile</NavItem>
+                                ) : [
+                                    <NavItem key="1" bsStyle="warning" bsSize="small" onClick={this.login}>Login</NavItem>,
+                                    <NavItem key="2" bsStyle="warning" bsSize="small" >register</NavItem>
+                                ]}
+
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
                 </div>
-            ) : (
-                <div>
-                    <Navbar className="navbar-form navbar-fixed-top pills">
-                        <Navbar.Header>
-                            <Nav>
-                                <h1>Music</h1>
-                            </Nav>
-                            <Navbar.Toggle />
-                        </Navbar.Header>
-                        <Navbar.Collapse>
-                            <Nav pullRight>
-                                <Button bsStyle="warning" bsSize="small" onClick={this.login}>Login</Button>
-                                <Button bsStyle="warning" bsSize="small" >register</Button>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
+                <div className="application-body">
+                    {this.props.children}
                 </div>
-            )
+            </div>
         );
     }
 }

@@ -43391,78 +43391,56 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return this.state.identity ? _react2['default'].createElement(
+	            return _react2['default'].createElement(
 	                'div',
 	                null,
 	                _react2['default'].createElement(
-	                    _reactBootstrap.Navbar,
-	                    { className: 'navbar-form navbar-fixed-top pills' },
+	                    'div',
+	                    null,
 	                    _react2['default'].createElement(
-	                        _reactBootstrap.Navbar.Header,
-	                        null,
+	                        _reactBootstrap.Navbar,
+	                        { fluid: true },
 	                        _react2['default'].createElement(
-	                            _reactBootstrap.Nav,
+	                            _reactBootstrap.Navbar.Header,
 	                            null,
 	                            _react2['default'].createElement(
-	                                'h1',
+	                                _reactBootstrap.Nav,
 	                                null,
-	                                'Music'
-	                            )
-	                        ),
-	                        _react2['default'].createElement(_reactBootstrap.Navbar.Toggle, null)
-	                    ),
-	                    _react2['default'].createElement(
-	                        _reactBootstrap.Navbar.Collapse,
-	                        null,
-	                        _react2['default'].createElement(
-	                            _reactBootstrap.Nav,
-	                            { pullRight: true },
-	                            _react2['default'].createElement(
-	                                _reactBootstrap.Button,
-	                                { bsStyle: 'warning', bsSize: 'small', onClick: this.login },
-	                                'Profile'
-	                            )
-	                        )
-	                    )
-	                )
-	            ) : _react2['default'].createElement(
-	                'div',
-	                null,
-	                _react2['default'].createElement(
-	                    _reactBootstrap.Navbar,
-	                    { className: 'navbar-form navbar-fixed-top pills' },
-	                    _react2['default'].createElement(
-	                        _reactBootstrap.Navbar.Header,
-	                        null,
-	                        _react2['default'].createElement(
-	                            _reactBootstrap.Nav,
-	                            null,
-	                            _react2['default'].createElement(
-	                                'h1',
-	                                null,
-	                                'Music'
-	                            )
-	                        ),
-	                        _react2['default'].createElement(_reactBootstrap.Navbar.Toggle, null)
-	                    ),
-	                    _react2['default'].createElement(
-	                        _reactBootstrap.Navbar.Collapse,
-	                        null,
-	                        _react2['default'].createElement(
-	                            _reactBootstrap.Nav,
-	                            { pullRight: true },
-	                            _react2['default'].createElement(
-	                                _reactBootstrap.Button,
-	                                { bsStyle: 'warning', bsSize: 'small', onClick: this.login },
-	                                'Login'
+	                                _react2['default'].createElement(
+	                                    _reactBootstrap.NavbarBrand,
+	                                    null,
+	                                    'Music'
+	                                )
 	                            ),
+	                            _react2['default'].createElement(_reactBootstrap.Navbar.Toggle, null)
+	                        ),
+	                        _react2['default'].createElement(
+	                            _reactBootstrap.Navbar.Collapse,
+	                            null,
 	                            _react2['default'].createElement(
-	                                _reactBootstrap.Button,
-	                                { bsStyle: 'warning', bsSize: 'small' },
-	                                'register'
+	                                _reactBootstrap.Nav,
+	                                { pullRight: true },
+	                                this.state.identity ? _react2['default'].createElement(
+	                                    _reactBootstrap.NavItem,
+	                                    { bsStyle: 'warning', bsSize: 'small', onClick: this.login },
+	                                    'Profile'
+	                                ) : [_react2['default'].createElement(
+	                                    _reactBootstrap.NavItem,
+	                                    { key: '1', bsStyle: 'warning', bsSize: 'small', onClick: this.login },
+	                                    'Login'
+	                                ), _react2['default'].createElement(
+	                                    _reactBootstrap.NavItem,
+	                                    { key: '2', bsStyle: 'warning', bsSize: 'small' },
+	                                    'register'
+	                                )]
 	                            )
 	                        )
 	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'application-body' },
+	                    this.props.children
 	                )
 	            );
 	        }
