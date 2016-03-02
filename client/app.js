@@ -8,9 +8,10 @@ import { createHistory } from 'history'
 import { replacePath, syncReduxAndRouter, routeReducer } from 'point-simple-router'
 import RouterStore from './modules/application/RouterStore'
 
-import Layout from './modules/application/pages/Layout'
+import PopularArtist from './modules/application/pages/PopularArtist'
 import LoginForm from './modules/user/components/LoginForm' 
 import MainPage from './modules/application/components/MainPage'
+import PopularAlbum from './modules/application/pages/PopularAlbum'
 
 const history = browserHistory
 
@@ -19,7 +20,7 @@ syncReduxAndRouter(browserHistory, RouterStore)
 ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={MainPage}>
-            <IndexRoute component={Layout}/>
+            <IndexRoute component={PopularArtist} />
         </Route>
     </Router>,
     document.querySelector("#app")/*getElementById('mount')*/

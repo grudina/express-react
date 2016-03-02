@@ -1,0 +1,49 @@
+#app, body, html {
+  height: 100%;
+}
+
+#application {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  #navbar {
+    flex-grow: 0;
+    .navbar {
+      margin: 0;
+    }
+  }
+
+  #content {
+    overflow-y: auto;
+    flex-grow: 2;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    #sidebar {
+      overflow-y: auto;
+      width: 300px;
+      flex-grow: 0;
+      background: #fff;
+      border-left: 1px #ccc solid;
+      margin: 0;
+      .panel {
+        margin: 0;
+      }
+    }
+
+    #body {
+      overflow-y: auto;
+      padding: 15px 0;
+      flex-grow: 2;
+    }
+  }
+
+  #player {
+    flex-grow: 0;
+    height: 60px;
+    width: 100%;
+    background: #dddddd;
+  }
+}

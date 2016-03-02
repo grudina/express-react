@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {listen} from 'point-one'
-import {Button, ButtonGroup, ButtonInput, Input, Jumbotron, Nav, NavItem, Navbar, NavbarBrand,
-    MenuItem, NavDropdown, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {Nav, NavItem, Navbar, NavbarBrand, Col, Panel, ListGroup, ListGroupItem} from 'react-bootstrap'
 import {UserStore, dispatch} from './../../user/UserStore'
 import {auth, logout} from './../../user/actions/user'
+import Home from './../pages/Home'
 
 @listen(UserStore, ['identity'])
 export default class MainPage extends Component {
@@ -12,8 +12,8 @@ export default class MainPage extends Component {
     }
     render() {
         return (
-            <div>
-                <div>
+            <div id="application">
+                <div id="navbar">
                     <Navbar fluid>
                         <Navbar.Header>
                             <Nav>
@@ -34,8 +34,29 @@ export default class MainPage extends Component {
                         </Navbar.Collapse>
                     </Navbar>
                 </div>
-                <div className="application-body">
-                    {this.props.children}
+                <div id="content">
+                    <div id="body">
+                        {this.state.identity ? (
+                            <div>
+                                <h1>Ok you are loged in</h1>
+                            </div> 
+                        ) : (
+                            <Home />
+                        )}
+                        
+                    </div>
+                    <div id="sidebar">
+                        <Panel bsStyle="success" header="sidebar">
+                            <h4>Album Name</h4>
+                        </Panel>
+                            <ListGroupItem href="#link1"><h5>Link 1</h5></ListGroupItem>
+                            <ListGroupItem href="#link2"><h5>Link 1</h5></ListGroupItem>
+                            <ListGroupItem href="#link3"><h5>Link 1</h5></ListGroupItem>
+                            
+                    </div>
+                </div>
+                <div className={`${this.state.identity ?  '' : 'hidden'}`} id="player">
+
                 </div>
             </div>
         );
