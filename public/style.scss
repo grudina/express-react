@@ -1,3 +1,5 @@
+@import "styles/sidebar";
+
 #app, body, html {
   height: 100%;
 }
@@ -45,5 +47,17 @@
     height: 60px;
     width: 100%;
     background: #dddddd;
+
+    #buttons {
+      margin: 0;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
   }
+}
+
+#register {
+  width: 30%;
+  margin: auto;
 }

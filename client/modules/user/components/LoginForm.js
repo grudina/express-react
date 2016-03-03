@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {listen} from 'point-one'
-import {Button} from 'react-bootstrap'
+import {Button, Input, Panel} from 'react-bootstrap'
 import {UserStore, dispatch} from './../UserStore'
 import {auth, logout} from './../actions/user'
 
@@ -22,8 +22,15 @@ export default class LoginForm extends Component {
                 </div>
             ) : (
                 <div>
-                    False
-                    <Button onClick={this.login}>Login</Button>
+                    <Panel id="register" header="Registration">
+                        <form >
+                            <Input type="text" label="Name" placeholder="Enter UserName" />
+                            <Input type="email" label="Email Address" placeholder="Enter Useremail" />
+                            <Input type="password" label="Password" />
+                            <Button>Register</Button>
+                            <Button onClick={this.login}>Login</Button>  
+                        </form>
+                    </Panel>
                 </div>
             )
         );

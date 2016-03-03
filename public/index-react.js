@@ -68,7 +68,7 @@
 
 	var _modulesApplicationRouterStore2 = _interopRequireDefault(_modulesApplicationRouterStore);
 
-	var _modulesApplicationPagesPopularArtist = __webpack_require__(493);
+	var _modulesApplicationPagesPopularArtist = __webpack_require__(244);
 
 	var _modulesApplicationPagesPopularArtist2 = _interopRequireDefault(_modulesApplicationPagesPopularArtist);
 
@@ -80,7 +80,7 @@
 
 	var _modulesApplicationComponentsMainPage2 = _interopRequireDefault(_modulesApplicationComponentsMainPage);
 
-	var _modulesApplicationPagesPopularAlbum = __webpack_require__(492);
+	var _modulesApplicationPagesPopularAlbum = __webpack_require__(489);
 
 	var _modulesApplicationPagesPopularAlbum2 = _interopRequireDefault(_modulesApplicationPagesPopularAlbum);
 
@@ -111,16 +111,37 @@
 	   value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _pointOne = __webpack_require__(2);
 
 	var _reducer = __webpack_require__(19);
 
 	var _actionsUser = __webpack_require__(22);
 
-	var finalCreateStore = (0, _pointOne.compose)((0, _pointOne.localStorageCache)("UserStore", ['identity']), (0, _pointOne.useDispatchers)((0, _pointOne.devTools)("UserStore")))(_pointOne.createStore);
+	var finalCreateStore = (0, _pointOne.compose)((0, _pointOne.localStorageCache)("UserStore", ['identity']), (0, _pointOne.useDispatchers)((0, _pointOne.devTools)("UserStore")), function (next) {
+	   return function (reducer, initialState) {
+	      var store = next(reducer, initialState),
+	          auth = store.getState().authenticated,
+	          dispatch = store.dispatch;
+
+	      store.listen(function (state) {
+	         if (state.authenticated && auth != state.authenticated) {
+	            console.log("user has been authenticated");
+	            console.log(state.authenticated);
+	            console.dir(state.identity.login);
+	         }
+	      });
+
+	      return _extends({}, store, {
+	         dispatch: dispatch
+	      });
+	   };
+	})(_pointOne.createStore);
 
 	var UserStore = finalCreateStore(_reducer.reducers, {
 	   forms: { auth: {} },
+	   authenticated: false,
 	   identity: false
 	});
 
@@ -1071,7 +1092,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
-	   value: true
+	    value: true
 	});
 
 	var _pointOne = __webpack_require__(2);
@@ -1079,8 +1100,9 @@
 	var _reducersUser = __webpack_require__(20);
 
 	var reducers = (0, _pointOne.concatReducers)({
-	   forms: (0, _pointOne.concatReducers)({ auth: _reducersUser.authForm }),
-	   identity: _reducersUser.user
+	    forms: (0, _pointOne.concatReducers)({ auth: _reducersUser.authForm }),
+	    identity: _reducersUser.user,
+	    authenticated: _reducersUser.authenticated
 	});
 	exports.reducers = reducers;
 
@@ -1096,7 +1118,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _concatEventReducers, _concatEventReducers2;
+	var _concatEventReducers, _concatEventReducers2, _concatEventReducers3;
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1126,7 +1148,35 @@
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
 	    return false;
 	}), _concatEventReducers2));
+
 	exports.user = user;
+	var authenticated = (0, _pointOne.concatEventReducers)((_concatEventReducers3 = {}, _defineProperty(_concatEventReducers3, _constants.USER_LOGIN, function (state, _ref3) {
+	    if (state === undefined) state = {};
+	    var ok = _ref3.ok;
+	    var data = _ref3.data;
+	    var token = _ref3.token;
+	    return ok;
+	}), _defineProperty(_concatEventReducers3, _constants.USER_LOGOUT, function () {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+	    return false;
+	}), _concatEventReducers3));
+
+	exports.authenticated = authenticated;
+	var auth = function auth(state, event) {
+	    if (state === undefined) state = false;
+
+	    switch (event.type) {
+	        case _constants.USER_LOGIN:
+	            {
+	                return event.ok;
+	            }
+	        case _constants.USER_LOGOUT:
+	            {
+	                return false;
+	            }
+	    }
+	};
+	exports.auth = auth;
 
 /***/ },
 /* 21 */
@@ -26259,7 +26309,92 @@
 	exports['default'] = store;
 
 /***/ },
-/* 244 */,
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(169);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(245);
+
+	var PopularArtist = (function (_Component) {
+	    _inherits(PopularArtist, _Component);
+
+	    function PopularArtist() {
+	        _classCallCheck(this, PopularArtist);
+
+	        _get(Object.getPrototypeOf(PopularArtist.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(PopularArtist, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                _reactBootstrap.Panel,
+	                { bsStyle: 'primary', header: 'Popular Artist' },
+	                _react2['default'].createElement(
+	                    _reactBootstrap.Row,
+	                    null,
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/cats' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/city' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/animals' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/food' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/people' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/cats' })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return PopularArtist;
+	})(_react.Component);
+
+	exports['default'] = PopularArtist;
+	;
+	module.exports = exports['default'];
+
+/***/ },
 /* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -43275,11 +43410,26 @@
 	            ) : _react2['default'].createElement(
 	                'div',
 	                null,
-	                'False',
 	                _react2['default'].createElement(
-	                    _reactBootstrap.Button,
-	                    { onClick: this.login },
-	                    'Login'
+	                    _reactBootstrap.Panel,
+	                    { id: 'register', header: 'Registration' },
+	                    _react2['default'].createElement(
+	                        'form',
+	                        null,
+	                        _react2['default'].createElement(_reactBootstrap.Input, { type: 'text', label: 'Name', placeholder: 'Enter UserName' }),
+	                        _react2['default'].createElement(_reactBootstrap.Input, { type: 'email', label: 'Email Address', placeholder: 'Enter Useremail' }),
+	                        _react2['default'].createElement(_reactBootstrap.Input, { type: 'password', label: 'Password' }),
+	                        _react2['default'].createElement(
+	                            _reactBootstrap.Button,
+	                            null,
+	                            'Register'
+	                        ),
+	                        _react2['default'].createElement(
+	                            _reactBootstrap.Button,
+	                            { onClick: this.login },
+	                            'Login'
+	                        )
+	                    )
 	                )
 	            );
 	        }
@@ -43328,9 +43478,21 @@
 
 	var _userActionsUser = __webpack_require__(22);
 
-	var _pagesHome = __webpack_require__(494);
+	var _Sidebar = __webpack_require__(490);
+
+	var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+	var _pagesHome = __webpack_require__(491);
 
 	var _pagesHome2 = _interopRequireDefault(_pagesHome);
+
+	var _pagesUserList = __webpack_require__(492);
+
+	var _pagesUserList2 = _interopRequireDefault(_pagesUserList);
+
+	var _userComponentsLoginForm = __webpack_require__(487);
+
+	var _userComponentsLoginForm2 = _interopRequireDefault(_userComponentsLoginForm);
 
 	var MainPage = (function (_Component) {
 	    _inherits(MainPage, _Component);
@@ -43345,6 +43507,11 @@
 	        key: 'login',
 	        value: function login() {
 	            (0, _userUserStore.dispatch)((0, _userActionsUser.auth)({ login: "Test", password: "Test" }));
+	        }
+	    }, {
+	        key: 'logout',
+	        value: function logout() {
+	            (0, _userUserStore.dispatch)((0, _userActionsUser.logout)());
 	        }
 	    }, {
 	        key: 'render',
@@ -43378,11 +43545,15 @@
 	                            _react2['default'].createElement(
 	                                _reactBootstrap.Nav,
 	                                { pullRight: true },
-	                                this.state.identity ? _react2['default'].createElement(
+	                                this.state.identity ? [_react2['default'].createElement(
 	                                    _reactBootstrap.NavItem,
-	                                    { bsStyle: 'warning', bsSize: 'small', onClick: this.login },
+	                                    { key: '1', bsStyle: 'warning', bsSize: 'small', onClick: this.logout },
+	                                    'Logout'
+	                                ), _react2['default'].createElement(
+	                                    _reactBootstrap.NavItem,
+	                                    { key: '2', bsStyle: 'warning', bsSize: 'small' },
 	                                    'Profile'
-	                                ) : [_react2['default'].createElement(
+	                                )] : [_react2['default'].createElement(
 	                                    _reactBootstrap.NavItem,
 	                                    { key: '1', bsStyle: 'warning', bsSize: 'small', onClick: this.login },
 	                                    'Login'
@@ -43401,58 +43572,57 @@
 	                    _react2['default'].createElement(
 	                        'div',
 	                        { id: 'body' },
-	                        this.state.identity ? _react2['default'].createElement(
-	                            'div',
-	                            null,
-	                            _react2['default'].createElement(
-	                                'h1',
-	                                null,
-	                                'Ok you are loged in'
-	                            )
-	                        ) : _react2['default'].createElement(_pagesHome2['default'], null)
+	                        this.state.identity ? _react2['default'].createElement(_pagesUserList2['default'], null) : _react2['default'].createElement(_pagesHome2['default'], null)
 	                    ),
+	                    _react2['default'].createElement(_Sidebar2['default'], null)
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: '' + (this.state.identity ? '' : 'hidden'), id: 'player' },
 	                    _react2['default'].createElement(
 	                        'div',
-	                        { id: 'sidebar' },
+	                        { id: 'buttons' },
 	                        _react2['default'].createElement(
-	                            _reactBootstrap.Panel,
-	                            { bsStyle: 'success', header: 'sidebar' },
+	                            _reactBootstrap.ButtonToolbar,
+	                            null,
 	                            _react2['default'].createElement(
-	                                'h4',
+	                                _reactBootstrap.Button,
 	                                null,
-	                                'Album Name'
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            _reactBootstrap.ListGroupItem,
-	                            { href: '#link1' },
+	                                _react2['default'].createElement(_reactBootstrap.Glyphicon, { glyph: 'step-backward' })
+	                            ),
 	                            _react2['default'].createElement(
-	                                'h5',
+	                                _reactBootstrap.Button,
 	                                null,
-	                                'Link 1'
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            _reactBootstrap.ListGroupItem,
-	                            { href: '#link2' },
+	                                _react2['default'].createElement(_reactBootstrap.Glyphicon, { glyph: 'backward' })
+	                            ),
 	                            _react2['default'].createElement(
-	                                'h5',
+	                                _reactBootstrap.Button,
 	                                null,
-	                                'Link 1'
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            _reactBootstrap.ListGroupItem,
-	                            { href: '#link3' },
+	                                _react2['default'].createElement(_reactBootstrap.Glyphicon, { glyph: 'stop' })
+	                            ),
 	                            _react2['default'].createElement(
-	                                'h5',
+	                                _reactBootstrap.Button,
 	                                null,
-	                                'Link 1'
+	                                _react2['default'].createElement(_reactBootstrap.Glyphicon, { glyph: 'play' })
+	                            ),
+	                            _react2['default'].createElement(
+	                                _reactBootstrap.Button,
+	                                null,
+	                                _react2['default'].createElement(_reactBootstrap.Glyphicon, { glyph: 'pause' })
+	                            ),
+	                            _react2['default'].createElement(
+	                                _reactBootstrap.Button,
+	                                null,
+	                                _react2['default'].createElement(_reactBootstrap.Glyphicon, { glyph: 'forward' })
+	                            ),
+	                            _react2['default'].createElement(
+	                                _reactBootstrap.Button,
+	                                null,
+	                                _react2['default'].createElement(_reactBootstrap.Glyphicon, { glyph: 'step-forward' })
 	                            )
 	                        )
 	                    )
-	                ),
-	                _react2['default'].createElement('div', { className: '' + (this.state.identity ? '' : 'hidden'), id: 'player' })
+	                )
 	            );
 	        }
 	    }]);
@@ -43466,10 +43636,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 489 */,
-/* 490 */,
-/* 491 */,
-/* 492 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43554,93 +43721,80 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 493 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(169);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactBootstrap = __webpack_require__(245);
+	var Sidebar = (function (_Component) {
+	    _inherits(Sidebar, _Component);
 
-	var PopularArtist = (function (_Component) {
-	    _inherits(PopularArtist, _Component);
+	    function Sidebar() {
+	        _classCallCheck(this, Sidebar);
 
-	    function PopularArtist() {
-	        _classCallCheck(this, PopularArtist);
-
-	        _get(Object.getPrototypeOf(PopularArtist.prototype), 'constructor', this).apply(this, arguments);
+	        _get(Object.getPrototypeOf(Sidebar.prototype), "constructor", this).apply(this, arguments);
 	    }
 
-	    _createClass(PopularArtist, [{
-	        key: 'render',
+	    _createClass(Sidebar, [{
+	        key: "render",
 	        value: function render() {
-	            return _react2['default'].createElement(
-	                _reactBootstrap.Panel,
-	                { bsStyle: 'primary', header: 'Popular Artist' },
-	                _react2['default'].createElement(
-	                    _reactBootstrap.Row,
-	                    null,
-	                    _react2['default'].createElement(
-	                        _reactBootstrap.Col,
-	                        { xs: 5, md: 2 },
-	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/cats' })
-	                    ),
-	                    _react2['default'].createElement(
-	                        _reactBootstrap.Col,
-	                        { xs: 5, md: 2 },
-	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/city' })
-	                    ),
-	                    _react2['default'].createElement(
-	                        _reactBootstrap.Col,
-	                        { xs: 5, md: 2 },
-	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/animals' })
-	                    ),
-	                    _react2['default'].createElement(
-	                        _reactBootstrap.Col,
-	                        { xs: 5, md: 2 },
-	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/food' })
-	                    ),
-	                    _react2['default'].createElement(
-	                        _reactBootstrap.Col,
-	                        { xs: 5, md: 2 },
-	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/people' })
-	                    ),
-	                    _react2['default'].createElement(
-	                        _reactBootstrap.Col,
-	                        { xs: 5, md: 2 },
-	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/cats' })
+	            var arr = [];
+	            for (var i = 0; i < 10; i++) {
+	                arr.push(i);
+	            }
+	            return _react2["default"].createElement(
+	                "div",
+	                { className: "sidebar" },
+	                _react2["default"].createElement(
+	                    "div",
+	                    { className: "sidebar-header" },
+	                    "Album Name"
+	                ),
+	                _react2["default"].createElement(
+	                    "div",
+	                    { className: "sidebar-content" },
+	                    _react2["default"].createElement(
+	                        "ul",
+	                        { className: "songs-list" },
+	                        arr.map(function (song, index) {
+	                            return _react2["default"].createElement(
+	                                "li",
+	                                { key: index, className: "song-element" },
+	                                "Song #" + song
+	                            );
+	                        })
 	                    )
 	                )
 	            );
 	        }
 	    }]);
 
-	    return PopularArtist;
+	    return Sidebar;
 	})(_react.Component);
 
-	exports['default'] = PopularArtist;
-	;
-	module.exports = exports['default'];
+	exports["default"] = Sidebar;
+	module.exports = exports["default"];
 
 /***/ },
-/* 494 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43665,11 +43819,11 @@
 
 	var _reactBootstrap = __webpack_require__(245);
 
-	var _PopularAlbum = __webpack_require__(492);
+	var _PopularAlbum = __webpack_require__(489);
 
 	var _PopularAlbum2 = _interopRequireDefault(_PopularAlbum);
 
-	var _PopularArtist = __webpack_require__(493);
+	var _PopularArtist = __webpack_require__(244);
 
 	var _PopularArtist2 = _interopRequireDefault(_PopularArtist);
 
@@ -43698,6 +43852,104 @@
 	})(_react.Component);
 
 	exports['default'] = Home;
+	module.exports = exports['default'];
+
+/***/ },
+/* 492 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(169);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(245);
+
+	var _PopularAlbum = __webpack_require__(489);
+
+	var _PopularAlbum2 = _interopRequireDefault(_PopularAlbum);
+
+	var _PopularArtist = __webpack_require__(244);
+
+	var _PopularArtist2 = _interopRequireDefault(_PopularArtist);
+
+	var UserList = (function (_Component) {
+	    _inherits(UserList, _Component);
+
+	    function UserList() {
+	        _classCallCheck(this, UserList);
+
+	        _get(Object.getPrototypeOf(UserList.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(UserList, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                _reactBootstrap.Grid,
+	                { fluid: true },
+	                _react2['default'].createElement(
+	                    'div',
+	                    null,
+	                    _react2['default'].createElement(
+	                        'h2',
+	                        null,
+	                        'Albums'
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/animals' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/city' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/cats' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/city' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/city' })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Col,
+	                        { xs: 5, md: 2 },
+	                        _react2['default'].createElement(_reactBootstrap.Thumbnail, { href: '#', alt: '180x180', src: 'http://lorempixel.com/180/180/animals' })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return UserList;
+	})(_react.Component);
+
+	exports['default'] = UserList;
 	module.exports = exports['default'];
 
 /***/ }
