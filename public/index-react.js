@@ -80,7 +80,7 @@
 
 	var _modulesApplicationComponentsMainPage2 = _interopRequireDefault(_modulesApplicationComponentsMainPage);
 
-	var _modulesApplicationPagesPopularAlbum = __webpack_require__(489);
+	var _modulesApplicationPagesPopularAlbum = __webpack_require__(491);
 
 	var _modulesApplicationPagesPopularAlbum2 = _interopRequireDefault(_modulesApplicationPagesPopularAlbum);
 
@@ -129,7 +129,7 @@
 	         if (state.authenticated && auth != state.authenticated) {
 	            console.log("user has been authenticated");
 	            console.log(state.authenticated);
-	            console.dir(state.identity.login);
+	            // console.dir(state.identity.login);
 	         }
 	      });
 
@@ -43398,39 +43398,47 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return this.state.identity ? _react2['default'].createElement(
-	                'div',
-	                null,
-	                'Ok',
+	            return(
+	                // this.state.identity ? (
+	                //     <div>
+	                //         Ok
+	                //         <Button onClick={this.logout}>Logout</Button>
+	                //     </div>
+	                // ) : (
 	                _react2['default'].createElement(
-	                    _reactBootstrap.Button,
-	                    { onClick: this.logout },
-	                    'Logout'
-	                )
-	            ) : _react2['default'].createElement(
-	                'div',
-	                null,
-	                _react2['default'].createElement(
-	                    _reactBootstrap.Panel,
-	                    { id: 'register', header: 'Registration' },
+	                    'div',
+	                    null,
 	                    _react2['default'].createElement(
-	                        'form',
-	                        null,
-	                        _react2['default'].createElement(_reactBootstrap.Input, { type: 'text', label: 'Name', placeholder: 'Enter UserName' }),
-	                        _react2['default'].createElement(_reactBootstrap.Input, { type: 'email', label: 'Email Address', placeholder: 'Enter Useremail' }),
-	                        _react2['default'].createElement(_reactBootstrap.Input, { type: 'password', label: 'Password' }),
+	                        _reactBootstrap.Panel,
+	                        { id: 'register', header: 'Registration' },
 	                        _react2['default'].createElement(
-	                            _reactBootstrap.Button,
+	                            'form',
 	                            null,
-	                            'Register'
-	                        ),
-	                        _react2['default'].createElement(
-	                            _reactBootstrap.Button,
-	                            { onClick: this.login },
-	                            'Login'
+	                            !this.state.identity ? _react2['default'].createElement(_reactBootstrap.Input, { type: 'text', label: 'Name', placeholder: 'Enter UserName' }) : _react2['default'].createElement(
+	                                'h4',
+	                                null,
+	                                'You are register. Please Login'
+	                            ),
+	                            _react2['default'].createElement(_reactBootstrap.Input, { type: 'email', label: 'Email Address', placeholder: 'Enter Useremail' }),
+	                            _react2['default'].createElement(_reactBootstrap.Input, { type: 'password', label: 'Password' }),
+	                            this.state.identity ? _react2['default'].createElement(
+	                                _reactBootstrap.Button,
+	                                { bsStyle: 'success', onClick: this.login },
+	                                'Login'
+	                            ) : [_react2['default'].createElement(
+	                                _reactBootstrap.Button,
+	                                { bsStyle: 'info', key: '1', onClick: this.logout },
+	                                'Register'
+	                            ), _react2['default'].createElement(
+	                                _reactBootstrap.Button,
+	                                { id: 'regis', bsStyle: 'success', key: '2', onClick: this.login },
+	                                'Login'
+	                            )]
 	                        )
 	                    )
 	                )
+	                // )
+
 	            );
 	        }
 	    }]);
@@ -43478,11 +43486,11 @@
 
 	var _userActionsUser = __webpack_require__(22);
 
-	var _Sidebar = __webpack_require__(490);
+	var _Sidebar = __webpack_require__(489);
 
 	var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
-	var _pagesHome = __webpack_require__(491);
+	var _pagesHome = __webpack_require__(490);
 
 	var _pagesHome2 = _interopRequireDefault(_pagesHome);
 
@@ -43493,6 +43501,10 @@
 	var _userComponentsLoginForm = __webpack_require__(487);
 
 	var _userComponentsLoginForm2 = _interopRequireDefault(_userComponentsLoginForm);
+
+	var _userComponentsLogin = __webpack_require__(493);
+
+	var _userComponentsLogin2 = _interopRequireDefault(_userComponentsLogin);
 
 	var MainPage = (function (_Component) {
 	    _inherits(MainPage, _Component);
@@ -43572,7 +43584,7 @@
 	                    _react2['default'].createElement(
 	                        'div',
 	                        { id: 'body' },
-	                        this.state.identity ? _react2['default'].createElement(_pagesUserList2['default'], null) : _react2['default'].createElement(_pagesHome2['default'], null)
+	                        this.state.identity ? _react2['default'].createElement(_userComponentsLogin2['default'], null) : _react2['default'].createElement(_userComponentsLogin2['default'], null)
 	                    ),
 	                    _react2['default'].createElement(_Sidebar2['default'], null)
 	                ),
@@ -43637,6 +43649,140 @@
 
 /***/ },
 /* 489 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(169);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Sidebar = (function (_Component) {
+	    _inherits(Sidebar, _Component);
+
+	    function Sidebar() {
+	        _classCallCheck(this, Sidebar);
+
+	        _get(Object.getPrototypeOf(Sidebar.prototype), "constructor", this).apply(this, arguments);
+	    }
+
+	    _createClass(Sidebar, [{
+	        key: "render",
+	        value: function render() {
+	            var arr = [];
+	            for (var i = 0; i < 10; i++) {
+	                arr.push(i);
+	            }
+	            return _react2["default"].createElement(
+	                "div",
+	                { className: "sidebar" },
+	                _react2["default"].createElement(
+	                    "div",
+	                    { className: "sidebar-header" },
+	                    "Album Name"
+	                ),
+	                _react2["default"].createElement(
+	                    "div",
+	                    { className: "sidebar-content" },
+	                    _react2["default"].createElement(
+	                        "ul",
+	                        { className: "songs-list" },
+	                        arr.map(function (song, index) {
+	                            return _react2["default"].createElement(
+	                                "li",
+	                                { key: index, className: "song-element" },
+	                                "Song #" + song
+	                            );
+	                        })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Sidebar;
+	})(_react.Component);
+
+	exports["default"] = Sidebar;
+	module.exports = exports["default"];
+
+/***/ },
+/* 490 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(169);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(245);
+
+	var _PopularAlbum = __webpack_require__(491);
+
+	var _PopularAlbum2 = _interopRequireDefault(_PopularAlbum);
+
+	var _PopularArtist = __webpack_require__(244);
+
+	var _PopularArtist2 = _interopRequireDefault(_PopularArtist);
+
+	var Home = (function (_Component) {
+	    _inherits(Home, _Component);
+
+	    function Home() {
+	        _classCallCheck(this, Home);
+
+	        _get(Object.getPrototypeOf(Home.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(Home, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                _reactBootstrap.Grid,
+	                { fluid: true },
+	                _react2['default'].createElement(_PopularAlbum2['default'], null),
+	                _react2['default'].createElement(_PopularArtist2['default'], null)
+	            );
+	        }
+	    }]);
+
+	    return Home;
+	})(_react.Component);
+
+	exports['default'] = Home;
+	module.exports = exports['default'];
+
+/***/ },
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43721,140 +43867,6 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 490 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _react = __webpack_require__(169);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var Sidebar = (function (_Component) {
-	    _inherits(Sidebar, _Component);
-
-	    function Sidebar() {
-	        _classCallCheck(this, Sidebar);
-
-	        _get(Object.getPrototypeOf(Sidebar.prototype), "constructor", this).apply(this, arguments);
-	    }
-
-	    _createClass(Sidebar, [{
-	        key: "render",
-	        value: function render() {
-	            var arr = [];
-	            for (var i = 0; i < 10; i++) {
-	                arr.push(i);
-	            }
-	            return _react2["default"].createElement(
-	                "div",
-	                { className: "sidebar" },
-	                _react2["default"].createElement(
-	                    "div",
-	                    { className: "sidebar-header" },
-	                    "Album Name"
-	                ),
-	                _react2["default"].createElement(
-	                    "div",
-	                    { className: "sidebar-content" },
-	                    _react2["default"].createElement(
-	                        "ul",
-	                        { className: "songs-list" },
-	                        arr.map(function (song, index) {
-	                            return _react2["default"].createElement(
-	                                "li",
-	                                { key: index, className: "song-element" },
-	                                "Song #" + song
-	                            );
-	                        })
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Sidebar;
-	})(_react.Component);
-
-	exports["default"] = Sidebar;
-	module.exports = exports["default"];
-
-/***/ },
-/* 491 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _react = __webpack_require__(169);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactBootstrap = __webpack_require__(245);
-
-	var _PopularAlbum = __webpack_require__(489);
-
-	var _PopularAlbum2 = _interopRequireDefault(_PopularAlbum);
-
-	var _PopularArtist = __webpack_require__(244);
-
-	var _PopularArtist2 = _interopRequireDefault(_PopularArtist);
-
-	var Home = (function (_Component) {
-	    _inherits(Home, _Component);
-
-	    function Home() {
-	        _classCallCheck(this, Home);
-
-	        _get(Object.getPrototypeOf(Home.prototype), 'constructor', this).apply(this, arguments);
-	    }
-
-	    _createClass(Home, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2['default'].createElement(
-	                _reactBootstrap.Grid,
-	                { fluid: true },
-	                _react2['default'].createElement(_PopularAlbum2['default'], null),
-	                _react2['default'].createElement(_PopularArtist2['default'], null)
-	            );
-	        }
-	    }]);
-
-	    return Home;
-	})(_react.Component);
-
-	exports['default'] = Home;
-	module.exports = exports['default'];
-
-/***/ },
 /* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -43880,7 +43892,7 @@
 
 	var _reactBootstrap = __webpack_require__(245);
 
-	var _PopularAlbum = __webpack_require__(489);
+	var _PopularAlbum = __webpack_require__(491);
 
 	var _PopularAlbum2 = _interopRequireDefault(_PopularAlbum);
 
@@ -43950,6 +43962,215 @@
 	})(_react.Component);
 
 	exports['default'] = UserList;
+	module.exports = exports['default'];
+
+/***/ },
+/* 493 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(169);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(245);
+
+	var _pointOne = __webpack_require__(2);
+
+	var _UserStore = __webpack_require__(1);
+
+	var _actionsUser = __webpack_require__(22);
+
+	var Login = (function (_Component) {
+	    _inherits(Login, _Component);
+
+	    function Login() {
+	        _classCallCheck(this, _Login);
+
+	        _get(Object.getPrototypeOf(_Login.prototype), 'constructor', this).call(this);
+
+	        this.state = {
+	            showModal: false,
+	            name: '',
+	            username: '',
+	            email: '',
+	            password: ''
+	        };
+	        this.close = this.close.bind(this);
+	        this.open = this.open.bind(this);
+	        this.handleClick = this.handleClick.bind(this);
+	        this.nameChange = this.nameChange.bind(this);
+	        this.usernameChange = this.usernameChange.bind(this);
+	        this.emailChange = this.emailChange.bind(this);
+	        this.passwordChange = this.passwordChange.bind(this);
+	    }
+
+	    _createClass(Login, [{
+	        key: 'close',
+	        value: function close() {
+	            this.setState({ showModal: false });
+	        }
+	    }, {
+	        key: 'open',
+	        value: function open() {
+	            this.setState({ showModal: true });
+	        }
+	    }, {
+	        key: 'nameChange',
+	        value: function nameChange(e) {
+	            this.setState({ name: e.target.value });
+	        }
+	    }, {
+	        key: 'usernameChange',
+	        value: function usernameChange(e) {
+	            this.setState({ username: e.target.value });
+	        }
+	    }, {
+	        key: 'emailChange',
+	        value: function emailChange(e) {
+	            this.setState({ email: e.target.value });
+	        }
+	    }, {
+	        key: 'passwordChange',
+	        value: function passwordChange(e) {
+	            this.setState({ password: e.target.value });
+	        }
+	    }, {
+	        key: 'handleClick',
+	        value: function handleClick(e) {
+	            var body = 'name=' + this.state.name + '&email=' + this.state.email + '&password=' + this.state.password + '&username=' + this.state.username;
+	            console.log(body);
+	            fetch('/api/user/body').then(function (response) {
+	                console.log(response);
+	                return response.json();
+	            }).then(function (data) {
+	                console.log(data.data.name);
+	                console.log(data.data.type);
+	            })['catch'](alert);
+	            console.log(this.state);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var popover = _react2['default'].createElement(
+	                _reactBootstrap.Popover,
+	                { id: '_popover', title: 'popover' },
+	                'very popover. such engagement'
+	            );
+	            var tooltip = _react2['default'].createElement(
+	                _reactBootstrap.Tooltip,
+	                { id: 'tooltip_' },
+	                'wow.'
+	            );
+
+	            return _react2['default'].createElement(
+	                'div',
+	                { id: 'register' },
+	                _react2['default'].createElement(
+	                    'h4',
+	                    null,
+	                    'Registration and Login'
+	                ),
+	                this.state.identity ? _react2['default'].createElement(
+	                    _reactBootstrap.Button,
+	                    { bsStyle: 'success', onClick: this.open },
+	                    'Login'
+	                ) : [_react2['default'].createElement(
+	                    _reactBootstrap.Button,
+	                    { bsStyle: 'info', key: '1', onClick: this.open },
+	                    'Register'
+	                ), _react2['default'].createElement(
+	                    _reactBootstrap.Button,
+	                    { id: 'regis', bsStyle: 'success', key: '2', onClick: this.open },
+	                    'Login'
+	                )],
+	                _react2['default'].createElement(
+	                    _reactBootstrap.Modal,
+	                    { show: this.state.showModal, onHide: this.close },
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Modal.Header,
+	                        { closeButton: true },
+	                        _react2['default'].createElement(
+	                            _reactBootstrap.Modal.Title,
+	                            null,
+	                            this.state.identity ? _react2['default'].createElement(
+	                                'div',
+	                                null,
+	                                _react2['default'].createElement(
+	                                    'h4',
+	                                    null,
+	                                    ' Login Form '
+	                                )
+	                            ) : _react2['default'].createElement(
+	                                'div',
+	                                null,
+	                                _react2['default'].createElement(
+	                                    'h4',
+	                                    null,
+	                                    ' Registration Form '
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2['default'].createElement('hr', null),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Modal.Body,
+	                        null,
+	                        !this.state.identity ? [_react2['default'].createElement(_reactBootstrap.Input, { key: '1', type: 'text', label: 'Name', placeholder: 'Enter Name',
+	                            value: this.state.name, onChange: this.nameChange }), _react2['default'].createElement(_reactBootstrap.Input, { key: '2', type: 'text', label: 'UserName', placeholder: 'Enter UserName',
+	                            value: this.state.username, onChange: this.usernameChange })] : _react2['default'].createElement(
+	                            'h4',
+	                            null,
+	                            'You have been registered. Please Login'
+	                        ),
+	                        _react2['default'].createElement(_reactBootstrap.Input, { type: 'email', label: 'Email Address', placeholder: 'Enter Useremail',
+	                            value: this.state.email, onChange: this.emailChange }),
+	                        _react2['default'].createElement(_reactBootstrap.Input, { type: 'password', label: 'Password',
+	                            value: this.state.password, onChange: this.passwordChange })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _reactBootstrap.Modal.Footer,
+	                        null,
+	                        this.state.identity ? _react2['default'].createElement(
+	                            _reactBootstrap.Button,
+	                            { bsStyle: 'success', onClick: this.login },
+	                            'Login'
+	                        ) : [_react2['default'].createElement(
+	                            _reactBootstrap.Button,
+	                            { bsStyle: 'info', key: '1', onClick: this.handleClick },
+	                            'Register'
+	                        ), _react2['default'].createElement(
+	                            _reactBootstrap.Button,
+	                            { id: 'regis', bsStyle: 'success', key: '2', onClick: this.open },
+	                            'Login'
+	                        )]
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    var _Login = Login;
+	    Login = (0, _pointOne.listen)(_UserStore.UserStore, ['identity'])(Login) || Login;
+	    return Login;
+	})(_react.Component);
+
+	exports['default'] = Login;
 	module.exports = exports['default'];
 
 /***/ }

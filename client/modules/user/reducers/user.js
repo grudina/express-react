@@ -17,6 +17,7 @@ export const authenticated = concatEventReducers({
     [USER_LOGOUT]: (state = false) => false
 })
 
+
 export let auth = function(state = false, event) {
     switch(event.type) {
         case USER_LOGIN: {

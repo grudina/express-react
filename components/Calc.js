@@ -2,7 +2,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-class Calc extends React.Component {
+export default class Calc extends React.Component {
     constructor() {
         super();
         this.state = {text: ''};
@@ -42,4 +42,4 @@ class Calc extends React.Component {
     }
 };
 console.log(document.querySelector('#app'))
-render(<Calc />, document.querySelector('#app'));
+// render(<Calc />, document.querySelector('#app'));

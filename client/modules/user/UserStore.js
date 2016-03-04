@@ -15,7 +15,7 @@ let finalCreateStore = compose(
           if(state.authenticated && auth != state.authenticated) {
              console.log("user has been authenticated");
              console.log(state.authenticated);
-             console.dir(state.identity.login);
+             // console.dir(state.identity.login);
           }
        });
 
@@ -27,9 +27,9 @@ let finalCreateStore = compose(
 )(createStore);
 
 export const UserStore = finalCreateStore(reducers, {
-   forms: {auth: {}},
-   authenticated: false,
-   identity: false
+    forms: {auth: {}},
+    authenticated: false,
+    identity: false,
 });
 
 export const dispatch = UserStore.dispatch;

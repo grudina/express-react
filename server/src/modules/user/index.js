@@ -4,7 +4,6 @@ import passport from 'passport'
 import {login} from './routes/login'
 import {profile} from './routes/profile'
 import {register} from './routes/register'
-import {playlist} from './routes/playlist'
 
 import {checkToken} from './middleware/checkToken'
 import {getUser} from './middleware/getUser'

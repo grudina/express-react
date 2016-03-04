@@ -8,6 +8,7 @@ import Sidebar from './Sidebar'
 import Home from './../pages/Home'
 import UserList from './../pages/UserList'
 import LoginForm from './../../user/components/LoginForm'
+import Login from './../../user/components/Login'
 
 @listen(UserStore, ['identity'])
 export default class MainPage extends Component {
@@ -45,9 +46,9 @@ export default class MainPage extends Component {
                 <div id="content">
                     <div id="body">
                         {this.state.identity ? (
-                            <UserList />
+                            <Login />
                         ) : (
-                            <Home />
+                            <Login />
                         )}
                         
                     </div>

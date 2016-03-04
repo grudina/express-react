@@ -22,6 +22,17 @@
         .sidebar .sidebar-content ul.songs-list li:hover {
           background: #eee; }
 
+#register {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  width: 350px;
+  background: #fff;
+  margin: auto;
+  padding: 15px 15px; }
+  #register #regis {
+    float: right; }
+
 #app, body, html {
   height: 100%; }
 
@@ -63,9 +74,5 @@
       display: flex;
       align-items: stretch;
       justify-content: center; }
-
-#register {
-  width: 30%;
-  margin: auto; }
 
 /*# sourceMappingURL=style.css.map */

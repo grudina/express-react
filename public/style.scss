@@ -1,4 +1,5 @@
 @import "styles/sidebar";
+@import "styles/register";
 
 #app, body, html {
   height: 100%;
@@ -57,7 +58,7 @@
   }
 }
 
-#register {
-  width: 30%;
-  margin: auto;
-}
+//#register {
+//  width: 30%;
+//  margin: auto;
+//}

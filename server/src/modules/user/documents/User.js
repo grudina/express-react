@@ -6,7 +6,7 @@ export const UserSchema = new Schema({
     name: {type: Object, default: {first: "", last: ""}},
     email: {type: String}
 });
-// console.log(UserSchema);
+
 
 UserSchema.plugin(authPlugin);
 UserSchema.plugin(timestampsPlugin);
